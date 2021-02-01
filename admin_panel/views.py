@@ -5,3 +5,9 @@ from django.http import HttpResponse, HttpResponseRedirect
 
 def home(request):
     return render(request, 'admin_panel/home.html')
+
+def index_product(request):
+    return render(request, 'admin_panel/products/index.html')
+def create_product(request):
+    return render(request, 'admin_panel/products/create.html')    
+

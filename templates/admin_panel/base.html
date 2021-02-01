@@ -10,8 +10,8 @@
     <link rel="stylesheet" href="style.css">
 
     <!-- Font Awesome JS -->
-    <script defer src="https://use.fontawesome.com/releases/v5.0.13/js/solid.js" integrity="sha384-tzzSw1/Vo+0N5UhStP3bvwWPq+uvzCMfrN1fEFe+xBmv1C/AtVX5K0uZtmcHitFZ" crossorigin="anonymous"></script>
-    <script defer src="https://use.fontawesome.com/releases/v5.0.13/js/fontawesome.js" integrity="sha384-6OIrr52G08NpOFSZdxxz1xdNSndlD4vdcf/q2myIUVO0VsqaGHJsB0RaBE01VTOY" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
 
 <style>
 
@@ -185,6 +185,41 @@ a.article:hover {
     }
 }
 
+* {
+  box-sizing: border-box;
+}
+
+#myInput {
+  background-image: url('/css/searchicon.png');
+  background-position: 10px 10px;
+  background-repeat: no-repeat;
+  width: 100%;
+  font-size: 16px;
+  padding: 12px 20px 12px 40px;
+  border: 1px solid #ddd;
+  margin-bottom: 12px;
+}
+
+#myTable {
+  border-collapse: collapse;
+  width: 100%;
+  border: 1px solid #ddd;
+  font-size: 18px;
+}
+
+#myTable th, #myTable td {
+  text-align: left;
+  padding: 12px;
+}
+
+#myTable tr {
+  border-bottom: 1px solid #ddd;
+}
+
+#myTable tr.header, #myTable tr:hover {
+  background-color: #f1f1f1;
+}
+
 
 </style>
 
@@ -201,29 +236,13 @@ a.article:hover {
     </div>
 
     <ul class="list-unstyled components">
-      <p>Deshboard</p>
-      <li class="active">
-        <a
-          href="#homeSubmenu"
-          data-toggle="collapse"
-          aria-expanded="false"
-          class="dropdown-toggle"
-          >Home</a
-        >
-        <ul class="collapse list-unstyled" id="homeSubmenu">
-          <li>
-            <a href="#">Home 1</a>
-          </li>
-          <li>
-            <a href="#">Home 2</a>
-          </li>
-          <li>
-            <a href="#">Home 3</a>
-          </li>
-        </ul>
+     
+    
+       <li>
+        <a href="{% url 'admin_home' %}"><i class="fa fa-tachometer" aria-hidden="true"></i> Deshboard</a>
       </li>
       <li>
-        <a href="#">About</a>
+        <a href="{% url 'index_product' %}"><i class="fa fa-product-hunt" aria-hidden="true"></i> Product</a>
       </li>
       <li>
         <a
@@ -246,10 +265,10 @@ a.article:hover {
         </ul>
       </li>
       <li>
-        <a href="#">Portfolio</a>
+        <a href="#"><i class="fa fa-user" aria-hidden="true"></i> User</a>
       </li>
       <li>
-        <a href="#">Contact</a>
+        <a href="#"><i class="fa fa-sign-in" aria-hidden="true"></i> Login</a>
       </li>
     </ul>
 
@@ -268,7 +287,8 @@ a.article:hover {
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
       <div class="container-fluid">
         <button type="button" id="sidebarCollapse" class="btn btn-info">
-          <i class="fas fa-align-left"></i>
+         <i class="fa fa-server" aria-hidden="true"></i>
+          
           
         </button>
         <button
@@ -295,7 +315,7 @@ a.article:hover {
               <a class="nav-link" href="#">Page</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="#">Log in</a>
+              <a class="nav-link" href="#"><i class="fa fa-sign-in" aria-hidden="true"></i> Log in</a>
             </li>
           </ul>
         </div>
@@ -340,6 +360,29 @@ a.article:hover {
             });
         });
     </script>
+    <script>
+function myFunction() {
+  // Declare variables
+  var input, filter, table, tr, td, i, txtValue;
+  input = document.getElementById("myInput");
+  filter = input.value.toUpperCase();
+  table = document.getElementById("myTable");
+  tr = table.getElementsByTagName("tr");
+
+  // Loop through all table rows, and hide those who don't match the search query
+  for (i = 0; i < tr.length; i++) {
+    td = tr[i].getElementsByTagName("td")[0];
+    if (td) {
+      txtValue = td.textContent || td.innerText;
+      if (txtValue.toUpperCase().indexOf(filter) > -1) {
+        tr[i].style.display = "";
+      } else {
+        tr[i].style.display = "none";
+      }
+    }
+  }
+}
+</script>
 
 </body>
 </html>

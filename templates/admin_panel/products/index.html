@@ -1,0 +1,49 @@
+{% extends 'admin_panel/base.html' %} {% block content %}
+
+<a class="btn btn-info mb-2" href="{% url 'create_product' %}">Add a Product</a>
+<div>
+  <input
+    type="text"
+    id="myInput"
+    onkeyup="myFunction()"
+    placeholder="Search for names.."
+    title="Type in a name"
+  />
+</div>
+
+<table class="table table-striped" id="myTable">
+  <thead>
+    <tr>
+      <th scope="col">User name</th>
+      <th scope="col">First Name</th>
+      <th scope="col">Email</th>
+      <th scope="col">Address</th>
+      <th scope="col">Fees</th>
+      <th scope="col">Action</th>
+    </tr>
+  </thead>
+
+  <tr>
+    <td>Ayan12</td>
+    <td>Ayan</td>
+    <td>Chowdhury</td>
+    <td>aaiz97@gmail.com</td>
+    <td>121212</td>
+    <td>
+      <form action="" method="POST" onsubmit="return confirm('Are you sure?');">
+        <a class="btn btn-primary" href=""
+          ><i class="fa fa-eye" aria-hidden="true"></i
+        ></a>
+        <a class="btn btn-warning m-2" href=""
+          ><i class="fa fa-pencil-square-o" aria-hidden="true"></i
+        ></a>
+
+        <button class="btn btn-danger" type="submit">
+          <i class="fa fa-trash" aria-hidden="true"></i>
+        </button>
+      </form>
+    </td>
+  </tr>
+
+  {% endblock content %}
+</table>
