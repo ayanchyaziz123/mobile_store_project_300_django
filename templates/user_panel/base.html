@@ -2,7 +2,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <title>Bootstrap 4 Example</title>
+  <title>ecom.com</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
@@ -24,7 +24,7 @@
 	  <div class="collapse navbar-collapse" id="navbarSupportedContent">
 	    <ul class="navbar-nav mr-auto">
 	      <li class="nav-item active">
-	        <a class="nav-link" href="">Store <span class="sr-only">(current)</span></a>
+	        <a class="nav-link" href="{% url 'user_store' %}">Store <span class="sr-only">(current)</span></a>
 	      </li>
 	 
 	    </ul>
@@ -32,7 +32,7 @@
 	     	<a href="#"class="btn btn-warning">Login</a>
 	     	
 	     	<a href="">
-	    		<img  id="cart-icon" >
+	    		<img  id="cart-icon"  src="{% static 'images/cart.png' %}">
 	    	</a>
 	    	<p id="cart-total">0</p>
 
