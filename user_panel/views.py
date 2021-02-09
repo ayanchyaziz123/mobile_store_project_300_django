@@ -31,6 +31,7 @@ def cart(request):
     context = {
         'items': items,
         'order': ord,
+        
     }
     return render(request, 'user_panel/cart.html', context)
 
