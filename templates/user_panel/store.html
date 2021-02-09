@@ -1,45 +1,20 @@
-{% extends 'user_panel/base.html' %}
-{% load static %}
-{% block content %}
-	<div class="row">
-		<div class="col-lg-4">
-			<img class="thumbnail" src="{% static 'images/placeholder.png' %}">
-			<div class="box-element product">
-				<h6><strong>Product</strong></h6>
-				<hr>
+{% extends 'user_panel/base.html' %} {% load static %} {% block content %}
+<div class="row">
+  {% for product in products %}
 
-				<button  class="btn btn-outline-secondary add-btn">Add to Cart</button>
-				<a class="btn btn-outline-success" href="#">View</a>
-				<h4 style="display: inline-block; float: right"><strong>$20</strong></h4>
+  <div class="col-lg-4">
+    <img class="thumbnail" src="{{product.imageURL1}}" />
+    <div class="box-element product">
+      <h6><strong>{{product.name}}</strong></h6>
+      <hr />
 
-			</div>
-		</div>
+      <button class="btn btn-outline-secondary add-btn">Add to Cart</button>
+      <a class="btn btn-outline-success" href="#">View</a>
+      <h4 style="display: inline-block; float: right"><strong>{{product.price|floatformat:2}}</strong></h4>
+    </div>
+  </div>
 
-		<div class="col-lg-4">
-			<img class="thumbnail" src="{% static 'images/placeholder.png' %}">
-			<div class="box-element product">
-				<h6><strong>Product</strong></h6>
-				<hr>
-				
-				<button  class="btn btn-outline-secondary add-btn">Add to Cart</button>
-				<a class="btn btn-outline-success" href="#">View</a>
-				<h4 style="display: inline-block; float: right"><strong>$20</strong></h4>
-				
-			</div>
-		</div>
-
-		<div class="col-lg-4">
-			<img class="thumbnail" src="{% static 'images/placeholder.png' %}">
-			<div class="box-element product">
-				<h6><strong>Product</strong></h6>
-				<hr>
-
-				<button  class="btn btn-outline-secondary add-btn">Add to Cart</button>
-				<a class="btn btn-outline-success" href="#">View</a>
-				<h4 style="display: inline-block; float: right"><strong>$20</strong></h4>
-
-			</div>
-		</div>
-	</div>
+  {% endfor %}
+</div>
 
 {% endblock content %}

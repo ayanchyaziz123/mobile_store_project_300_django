@@ -1,0 +1,4 @@
+    superuser
+
+emaill : admin@admin.com
+pass : admin123
