@@ -1,62 +1,86 @@
 {% load static %}
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <title>ecom.com</title>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-   <link rel="stylesheet" href="{% static 'user/css/style.css' %}">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+  <head>
+    <title>ecom.com</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link
+      rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+    />
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="{% static 'user/css/style.css' %}" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 
-   <script>
- var user = '{{request.user}}'
- </script>
+    <script>
+      var user = "{{request.user}}";
 
-  
-</head>
-<body>
+      function getCookie(name) {
+        let cookieValue = null;
+        if (document.cookie && document.cookie !== "") {
+          const cookies = document.cookie.split(";");
+          for (let i = 0; i < cookies.length; i++) {
+            const cookie = cookies[i].trim();
+            // Does this cookie string begin with the name we want?
+            if (cookie.substring(0, name.length + 1) === name + "=") {
+              cookieValue = decodeURIComponent(
+                cookie.substring(name.length + 1)
+              );
+              break;
+            }
+          }
+        }
+        return cookieValue;
+      }
+      var csrftoken = getCookie("csrftoken");
+    </script>
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+      <a class="navbar-brand" href="{% url 'user_home' %}">Ecom</a>
+      <button
+        class="navbar-toggler"
+        type="button"
+        data-toggle="collapse"
+        data-target="#navbarSupportedContent"
+        aria-controls="navbarSupportedContent"
+        aria-expanded="false"
+        aria-label="Toggle navigation"
+      >
+        <span class="navbar-toggler-icon"></span>
+      </button>
 
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+          <li class="nav-item active">
+            <a class="nav-link" href="{% url 'user_store' %}"
+              >Store <span class="sr-only">(current)</span></a
+            >
+          </li>
+          <li class="nav-item active">
+            <a class="nav-link" href="{% url 'user_store' %}"
+              >Contact <span class="sr-only">(current)</span></a
+            >
+          </li>
+        </ul>
+        <div class="form-inline my-2 my-lg-0">
+          <a href="#" class="btn btn-warning">Login</a>
 
-  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-	  <a class="navbar-brand" href="{% url 'user_home' %}">Ecom</a>
-	  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-	    <span class="navbar-toggler-icon"></span>
-	  </button>
+          <a href="{% url 'user_cart' %}">
+            <img id="cart-icon" src="{% static 'images/cart.png' %}" />
+          </a>
+          <p id="cart-total">{{cartItems}}</p>
 
-	  <div class="collapse navbar-collapse" id="navbarSupportedContent">
-	    <ul class="navbar-nav mr-auto">
-	      <li class="nav-item active">
-	        <a class="nav-link" href="{% url 'user_store' %}">Store <span class="sr-only">(current)</span></a>
-	      </li>
-		    <li class="nav-item active">
-	        <a class="nav-link" href="{% url 'user_store' %}">Contact <span class="sr-only">(current)</span></a>
-	      </li>
-	 
-	    </ul>
-	    <div class="form-inline my-2 my-lg-0">
-	     	<a href="#"class="btn btn-warning">Login</a>
-	     	
-	     	<a href="{% url 'user_cart' %}">
-	    		<img  id="cart-icon"  src="{% static 'images/cart.png' %}">
-	    	</a>
-	    	<p id="cart-total">0</p>
+          <input type="text" class="form-control ml-md-4" />
+          <a href="" class="btn btn-danger">Search</a>
+        </div>
+      </div>
+    </nav>
+    <div class="container">{% block content %} {% endblock content %}</div>
 
-		<input type="text" class="form-control ml-md-4">	
-		<a href="" class="btn btn-danger">Search</a>	
-
-	    </div>
-	  </div>
-	</nav>
-    <div class="container">
-    {% block content %}
-    {% endblock content %}
-    </div>
-
- <script  src="{% static 'user/js/cart.js' %}"></script>
-
-
-</body>
+    <script src="{% static 'user/js/cart.js' %}"></script>
+  </body>
 </html>
