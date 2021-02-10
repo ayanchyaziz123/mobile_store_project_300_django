@@ -16,7 +16,7 @@
 
 
   <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-	  <a class="navbar-brand" href="">Ecom</a>
+	  <a class="navbar-brand" href="{% url 'user_home' %}">Ecom</a>
 	  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
 	    <span class="navbar-toggler-icon"></span>
 	  </button>
@@ -25,6 +25,9 @@
 	    <ul class="navbar-nav mr-auto">
 	      <li class="nav-item active">
 	        <a class="nav-link" href="{% url 'user_store' %}">Store <span class="sr-only">(current)</span></a>
+	      </li>
+		    <li class="nav-item active">
+	        <a class="nav-link" href="{% url 'user_store' %}">Contact <span class="sr-only">(current)</span></a>
 	      </li>
 	 
 	    </ul>
@@ -35,6 +38,9 @@
 	    		<img  id="cart-icon"  src="{% static 'images/cart.png' %}">
 	    	</a>
 	    	<p id="cart-total">0</p>
+
+		<input type="text" class="form-control ml-md-2">	
+		<a href="" class="btn btn-danger">Search</a>	
 
 	    </div>
 	  </div>

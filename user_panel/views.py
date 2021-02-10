@@ -19,19 +19,19 @@ def store(request):
 
 
 def cart(request):
-    ord = {}
+    ord = []
     if request.user.is_authenticated:
         customer = request.user.customer
         order, created = Order.objects.get_or_create(customer=customer, complete=False)
-        ord = order, created = Order.objects.get_or_create(customer=customer, complete=False)
         items = order.orderitem_set.all()
     else:
         items = []
+        order = []
 
     context = {
         'items': items,
-        'order': ord,
-        
+        'order': order,
+
     }
     return render(request, 'user_panel/cart.html', context)
 
