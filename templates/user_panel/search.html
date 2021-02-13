@@ -1,0 +1,103 @@
+{% extends 'user_panel/base.html' %}
+{% load static %}
+
+
+{% block content %}
+
+
+
+<div class="container">
+<div class="row ml-1 mb-1">
+    <h2 class="mb-5 mt-4"  id="heading">Search Results</h2>
+
+</div>
+
+
+<!--row-1--->
+
+    <div class="row">
+
+        <!--col-1-->
+   <div class="col-sm-9 mb-5">
+  <div class="card p-1">
+
+       {% if pro|length < 1 %}
+
+      <div class="card  p-2 ">
+       <h4 style="margin-top:40;">
+
+          Your search -<u>{{query}}</u>- did not match any documents
+
+
+       </h4><br>
+       <div class="card ml-4 p-2">
+       <span><i class="fa fa-plus-circle" aria-hidden="true"></i> Make sure that all words are spelled correctly.</span>
+<span><i class="fa fa-plus-circle" aria-hidden="true"></i> Try different keywords.</span>
+<span><i class="fa fa-plus-circle" aria-hidden="true"></i> Try more general keywords.</span>
+ <span><i class="fa fa-plus-circle" aria-hidden="true"></i> Try fewer keywords.</span>
+
+
+
+        <a class="text-style" href=""><span><i class="fa fa-plus-circle" aria-hidden="true"></i> Go to Blog Page</span></a>
+</div>
+</div>
+       {% else %}
+
+    {% for product in pro %}
+
+
+       <div class="card pt-4 pl-4 pb-4 pr-4">
+
+
+                    <div class="card-body">
+
+                        <div class="mt-3">
+
+                            <img style="float:left;" class="d-inline-block" src="{{ post.get_photoURL1 }}" height=80;
+                                width=80; alt="abc">
+
+
+                            <a href="">
+
+                                <p  style="margin-left:100px;" class="text-style">
+                                    {{ product.name |truncatewords:30 }}
+                                </p>
+                            </a>
+
+
+
+
+
+                        </div>
+
+
+
+                    </div>
+
+
+
+
+
+
+
+        </div>
+
+
+
+
+
+       {% endfor %}
+       {% endif %}
+
+
+</div>
+
+
+
+
+
+{% endblock content %}
+    
+    
+    
+    

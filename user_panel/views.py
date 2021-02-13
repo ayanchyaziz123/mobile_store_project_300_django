@@ -4,13 +4,32 @@ from .models import *
 import json
 import datetime
 from django.views.decorators.csrf import csrf_protect
+from django.db.models import Q
 
 
 # Create your views here.
 
 
 def home(request):
-    return render(request, 'user_panel/home.html')
+    if request.user.is_authenticated:
+        customer = request.user.customer
+        order, created = Order.objects.get_or_create(customer=customer, complete=False)
+        items = order.orderitem_set.all()
+        cartItems = order.get_cart_items
+    else:
+        items = []
+        order = {'get_cart_total':0, 'get_cart_items': 0, 'shipping': False}
+        cartItems = order['get_cart_items']
+
+    products = Product.objects.all()
+    context = {}
+    context = {
+        'products': products,
+        'items': items,
+        'order': order,
+        'cartItems': cartItems,
+    }
+    return render(request, 'user_panel/home.html', context)
 
 
 def store(request):
@@ -125,3 +144,34 @@ def processOrder(request):
     else:
         print("user is not logged in")    
     return JsonResponse("payment complete", safe=False)
+
+def serach(request):
+    query = request.GET['search']
+    if query =="":
+        Pro = ""
+    else:
+        Pro = Product.objects.filter(Q(name__icontains=query) | Q(price__contains=query))
+     
+
+
+    if request.user.is_authenticated:
+        customer = request.user.customer
+        order, created = Order.objects.get_or_create(customer=customer, complete=False)
+        items = order.orderitem_set.all()
+        cartItems = order.get_cart_items
+    else:
+        items = []
+        order = {'get_cart_total':0, 'get_cart_items': 0, 'shipping': False}
+        cartItems = order['get_cart_items']
+
+    products = Product.objects.all()
+    context = {}
+    context = {
+        'products': products,
+        'items': items,
+        'order': order,
+        'cartItems': cartItems,
+        'pro':Pro,
+        'query':query
+    }
+    return render(request, 'user_panel/search.html', context)

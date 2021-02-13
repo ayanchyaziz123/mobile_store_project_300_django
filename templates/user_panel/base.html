@@ -137,12 +137,14 @@
         <div class="form-inline my-2 my-lg-0 text-center">
          <div class="d-flex flex-row">
   <div class="ml-3"> 
+  <form  method="get" action="{% url 'user_search' %}">
   
-  <input type="search" class="form-control" /></div>
+  <input type="search" class="form-control" name="search"/> </div>
 
 
-  <div class=""> <a class="btn btn-danger" href="#">Search<a/></div>
+  <div class=""> <button class="btn btn-danger" type="submit">Search</button></div>
   
+  </form>
 </div>
 
        
