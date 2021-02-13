@@ -5,6 +5,7 @@ import json
 import datetime
 from django.views.decorators.csrf import csrf_protect
 from django.db.models import Q
+from django.core.paginator import Paginator
 
 
 # Create your views here.
@@ -44,6 +45,9 @@ def store(request):
         cartItems = order['get_cart_items']
 
     products = Product.objects.all()
+    paginator = Paginator(products, 1)
+    page = request.GET.get('page')
+    products = paginator.get_page(page)
     context = {}
     context = {
         'products': products,
