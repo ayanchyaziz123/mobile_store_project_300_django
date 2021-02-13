@@ -175,3 +175,26 @@ def serach(request):
         'query':query
     }
     return render(request, 'user_panel/search.html', context)
+
+def view(request, slug):
+    Pro = Product.objects.filter(id=slug).first()
+    if request.user.is_authenticated:
+        customer = request.user.customer
+        order, created = Order.objects.get_or_create(customer=customer, complete=False)
+        items = order.orderitem_set.all()
+        cartItems = order.get_cart_items
+    else:
+        items = []
+        order = {'get_cart_total':0, 'get_cart_items': 0, 'shipping': False}
+        cartItems = order['get_cart_items']
+
+    products = Product.objects.all()
+    context = {}
+    context = {
+        'products': products,
+        'items': items,
+        'order': order,
+        'cartItems': cartItems,
+        'pro':Pro,
+    }
+    return render(request, 'user_panel/view.html', context)
