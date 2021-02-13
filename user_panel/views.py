@@ -45,7 +45,7 @@ def store(request):
         cartItems = order['get_cart_items']
 
     products = Product.objects.all()
-    paginator = Paginator(products, 1)
+    paginator = Paginator(products, 3)
     page = request.GET.get('page')
     products = paginator.get_page(page)
     context = {}
@@ -169,6 +169,7 @@ def serach(request):
         cartItems = order['get_cart_items']
 
     products = Product.objects.all()
+    tot = Pro.count()
     context = {}
     context = {
         'products': products,
@@ -176,7 +177,8 @@ def serach(request):
         'order': order,
         'cartItems': cartItems,
         'pro':Pro,
-        'query':query
+        'query':query,
+        'tot': tot,
     }
     return render(request, 'user_panel/search.html', context)
 
@@ -200,5 +202,6 @@ def view(request, slug):
         'order': order,
         'cartItems': cartItems,
         'pro':Pro,
+        
     }
     return render(request, 'user_panel/view.html', context)

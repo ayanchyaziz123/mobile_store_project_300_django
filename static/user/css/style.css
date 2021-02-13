@@ -55,7 +55,8 @@ h1,h2,h3,h4,h5,h6{
 }
 
 .row-image{
-	width: 100px;
+	width: 70px;
+	max-width: 70px;
 }
 
 .form-field{
@@ -107,4 +108,7 @@ h1,h2,h3,h4,h5,h6{
 }
 .form-control{
 	font-size: 13px !important;
+}
+a{
+	color: gray;
 }

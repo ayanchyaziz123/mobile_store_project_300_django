@@ -46,22 +46,22 @@
         <div style="flex: 2">
           <img class="row-image" src="{{item.product.imageURL1}}" />
         </div>
-        <div style="flex: 2" class="mt-3"><p>{{item.product.name}}</p></div>
-        <div style="flex: 1" class="mt-3"><p>{{item.product.price|floatformat:2}}</p></div>
+        <div style="flex: 2" class="mt-4 mr-0"><p>{{item.product.name |truncatechars:6}}</p></div>
+        <div style="flex: 1" class="mt-4"><p>{{item.product.price|floatformat:2}}</p></div>
         <div style="flex: 1">
           <div class="align-self-start">
           <a href="#" data-product={{item.product.id}} data-action="add" class="update-cart">
-            <i class="fa fa-arrow-up" aria-hidden="true"></i>
+            <i class="fa fa-arrow-up ml-3" aria-hidden="true"></i>
             </a>
           </div>
-          <div class="align-self-end">{{item.quantity}}</div>
+          <div class="align-self-end ml-3">[{{item.quantity}}]</div>
           <div class="align-self-center">
           <a href="#" data-product={{item.product.id}} data-action="remove" class="update-cart">
-            <i class="fa fa-arrow-down" aria-hidden="true"></i>
+            <i class="fa fa-arrow-down ml-3" aria-hidden="true"></i>
             </a>
           </div>
         </div>
-        <div style="flex: 1" class="mt-3"><p>${{item.get_total}}</p></div>
+        <div style="flex: 1" class="mt-4"><p>${{item.get_total|floatformat:2}}</p></div>
       </div>
 
       {% endfor %}

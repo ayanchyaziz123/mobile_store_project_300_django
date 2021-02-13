@@ -10,7 +10,7 @@
 
       <button data-product={{product.id}} data-action="add" class="btn btn-outline-secondary add-btn update-cart"><i class="fa fa-cart-plus" aria-hidden="true"></i></button>
       <a class="btn btn-outline-success" href="{% url 'user_view' product.id %}"><i class="fa fa-eye" aria-hidden="true"></i></a>
-      <h4 style="display: inline-block; float: right"><strong>{{product.price|floatformat:2}}</strong></h4>
+      <h4 style="display: inline-block; float: right"><strong>&#2547; {{product.price|floatformat:2}}</strong></h4>
     </div>
   </div>
 

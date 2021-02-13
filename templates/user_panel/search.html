@@ -42,6 +42,7 @@
 </div>
 </div>
        {% else %}
+       <p>total search results : {{tot}}</p>
 
     {% for product in pro %}
 
@@ -53,7 +54,7 @@
 
                         <div class="mt-3">
 
-                            <img style="float:left;" class="d-inline-block" src="{{ post.imageURL1 }}" height=80;
+                            <img style="float:left;" class="d-inline-block" src="{{ product.imageURL1 }}" height=80;
                                 width=80; alt="abc">
 
 
@@ -63,6 +64,11 @@
                                     {{ product.name |truncatewords:30 }}
                                 </p>
                             </a>
+                             <hr class="ml-2"/>
+                            <button data-product={{product.id}} data-action="add" class="btn btn-outline-secondary add-btn update-cart ml-5"><i class="fa fa-cart-plus" aria-hidden="true"></i></button>
+            <a class="btn btn-outline-success " href="{% url 'user_view' product.id %}"><i class="fa fa-eye" aria-hidden="true"></i></a>
+
+
 
 
 
