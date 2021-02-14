@@ -6,23 +6,18 @@ import datetime
 from django.views.decorators.csrf import csrf_protect
 from django.db.models import Q
 from django.core.paginator import Paginator
-from . utils import cookieCart
+from . utils import cartData, cookieCart, guestOrder
 
 #
 # Create your views here.
 
 
 def home(request):
-    if request.user.is_authenticated:
-        customer = request.user.customer
-        order, created = Order.objects.get_or_create(customer=customer, complete=False)
-        items = order.orderitem_set.all()
-        cartItems = order.get_cart_items
-    else:
-        cookieData = cookieCart(request)
-        cartItems = cookieData['cartItems']
-        order = cookieData['order'] 
-        items = cookieData['items']   
+    data = cartData(request)
+
+    cartItems = data['cartItems']
+    order = data['order']
+    items = data['items']
 
     products = Product.objects.all()
     context = {}
@@ -36,16 +31,11 @@ def home(request):
 
 
 def store(request):
-    if request.user.is_authenticated:
-        customer = request.user.customer
-        order, created = Order.objects.get_or_create(customer=customer, complete=False)
-        items = order.orderitem_set.all()
-        cartItems = order.get_cart_items
-    else:
-        cookieData = cookieCart(request)
-        cartItems = cookieData['cartItems']
-        order = cookieData['order'] 
-        items = cookieData['items']   
+    data = cartData(request)
+
+    cartItems = data['cartItems']
+    order = data['order']
+    items = data['items']
 
     products = Product.objects.all()
     paginator = Paginator(products, 3)
@@ -62,16 +52,11 @@ def store(request):
 
 
 def cart(request):
-    if request.user.is_authenticated:
-        customer = request.user.customer
-        order, created = Order.objects.get_or_create(customer=customer, complete=False)
-        items = order.orderitem_set.all()
-        cartItems = order.get_cart_items
-    else:
-        cookieData = cookieCart(request)
-        cartItems = cookieData['cartItems']
-        order = cookieData['order'] 
-        items = cookieData['items']      
+    data = cartData(request)
+
+    cartItems = data['cartItems']
+    order = data['order']
+    items = data['items']
 
     context = {
         'items': items,
@@ -81,49 +66,50 @@ def cart(request):
     }
     return render(request, 'user_panel/cart.html', context)
 
+
 @csrf_protect
 def checkout(request):
-    if request.user.is_authenticated:
-        customer = request.user.customer
-        order, created = Order.objects.get_or_create(customer=customer, complete=False)
-        items = order.orderitem_set.all()
-        cartItems = order.get_cart_items
-    else:
-        cookieData = cookieCart(request)
-        cartItems = cookieData['cartItems']
-        order = cookieData['order'] 
-        items = cookieData['items']   
+    data = cartData(request)
+
+    cartItems = data['cartItems']
+    order = data['order']
+    items = data['items']
 
     context = {
         'items': items,
         'order': order,
-         'cartItems': cartItems,
+        'cartItems': cartItems,
 
     }
     return render(request, 'user_panel/checkout.html', context)
+
 
 def updateItem(request):
     data = json.loads(request.body)
     productId = data['productId']
     action = data['action']
     print("product id", productId)
-    print("action :" , action)
+    print("action :", action)
 
     customer = request.user.customer
     product = Product.objects.get(id=productId)
-    order, created = Order.objects.get_or_create(customer=customer, complete=False)
+    order, created = Order.objects.get_or_create(
+        customer=customer, complete=False)
 
-    orderItem, created = OrderItem.objects.get_or_create(order=order, product=product)
+    orderItem, created = OrderItem.objects.get_or_create(
+        order=order, product=product)
 
     if action == 'add':
         orderItem.quantity = (orderItem.quantity + 1)
     elif action == 'remove':
-        orderItem.quantity = (orderItem.quantity - 1)   
+        orderItem.quantity = (orderItem.quantity - 1)
 
     orderItem.save()
     if orderItem.quantity <= 0:
         orderItem.delete()
     return JsonResponse("item was added", safe=False)
+
+
 @csrf_protect
 def processOrder(request):
     print('Data', request.body)
@@ -131,48 +117,47 @@ def processOrder(request):
     data = json.loads(request.body)
     if request.user.is_authenticated:
         customer = request.user.customer
-        order, created = Order.objects.get_or_create(customer=customer, complete=False)
-        total = float(data['form']['total'])
-        order.transaction_id = transaction_id
-
-        if total == order.get_cart_total:
-            order.complete = True
-        order.save()   
-    if order.shipping == True:
-        ShippingAddress.objects.create(
-            customer = customer,
-            order = order,
-            address = data['shipping']['address'],
-            city = data['shipping']['city'],
-            state = data['shipping']['state'],
-            zipcode = data['shipping']['zipcode'],
-
-
-        )     
+        order, created = Order.objects.get_or_create(
+            customer=customer, complete=False)
 
     else:
-        print("user is not logged in")    
+        customer, order = guestOrder(request, data)
+
+    total = float(data['form']['total'])
+    order.transaction_id = transaction_id
+
+    if total == order.get_cart_total:
+        order.complete = True
+    order.save()
+
+    if order.shipping == True:
+        ShippingAddress.objects.create(
+            customer=customer,
+            order=order,
+            address=data['shipping']['address'],
+            city=data['shipping']['city'],
+            state=data['shipping']['state'],
+            zipcode=data['shipping']['zipcode'],
+
+
+        )
+
     return JsonResponse("payment complete", safe=False)
+
 
 def serach(request):
     query = request.GET['search']
-    if query =="":
+    if query == "":
         Pro = ""
     else:
-        Pro = Product.objects.filter(Q(name__icontains=query) | Q(price__contains=query))
-     
+        Pro = Product.objects.filter(
+            Q(name__icontains=query) | Q(price__contains=query))
 
+    data = cartData(request)
 
-    if request.user.is_authenticated:
-        customer = request.user.customer
-        order, created = Order.objects.get_or_create(customer=customer, complete=False)
-        items = order.orderitem_set.all()
-        cartItems = order.get_cart_items
-    else:
-        cookieData = cookieCart(request)
-        cartItems = cookieData['cartItems']
-        order = cookieData['order'] 
-        items = cookieData['items']   
+    cartItems = data['cartItems']
+    order = data['order']
+    items = data['items']
 
     products = Product.objects.all()
     tot = Pro.count()
@@ -182,24 +167,20 @@ def serach(request):
         'items': items,
         'order': order,
         'cartItems': cartItems,
-        'pro':Pro,
-        'query':query,
+        'pro': Pro,
+        'query': query,
         'tot': tot,
     }
     return render(request, 'user_panel/search.html', context)
 
+
 def view(request, slug):
     Pro = Product.objects.filter(id=slug).first()
-    if request.user.is_authenticated:
-        customer = request.user.customer
-        order, created = Order.objects.get_or_create(customer=customer, complete=False)
-        items = order.orderitem_set.all()
-        cartItems = order.get_cart_items
-    else:
-        cookieData = cookieCart(request)
-        cartItems = cookieData['cartItems']
-        order = cookieData['order'] 
-        items = cookieData['items']   
+    data = cartData(request)
+
+    cartItems = data['cartItems']
+    order = data['order']
+    items = data['items']
 
     products = Product.objects.all()
     context = {}
@@ -208,7 +189,7 @@ def view(request, slug):
         'items': items,
         'order': order,
         'cartItems': cartItems,
-        'pro':Pro,
-        
+        'pro': Pro,
+
     }
     return render(request, 'user_panel/view.html', context)
