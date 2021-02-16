@@ -20,6 +20,10 @@ from . import settings
 from django.contrib.staticfiles.urls import static
 from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 
+admin.site.site_header = "AyanEcom"
+admin.site.site_title = "Ayan Ecom Panel"
+admin.site.index_title = "Welcomee Ayan Ecom Admin Panel"
+
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('user_panel.urls')),
