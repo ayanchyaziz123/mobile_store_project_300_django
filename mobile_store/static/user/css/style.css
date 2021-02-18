@@ -115,3 +115,6 @@ a{
 .cols{
 	color: #fff i !important;
 }
+.im{
+	max-width: 30px;
+}

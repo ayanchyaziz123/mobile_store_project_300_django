@@ -38,7 +38,7 @@ def store(request):
     items = data['items']
 
     products = Product.objects.all()
-    paginator = Paginator(products, 3)
+    paginator = Paginator(products, 6)
     page = request.GET.get('page')
     products = paginator.get_page(page)
     context = {}

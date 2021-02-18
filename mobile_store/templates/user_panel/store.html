@@ -6,6 +6,7 @@
     <img class="thumbnail" src="{{product.imageURL1}}" />
     <div class="box-element product">
       <h6><strong>{{product.name}}</strong></h6>
+      <p>{{product.descriptions |truncatechars:43}}</p>
       <hr />
 
       <button data-product={{product.id}} data-action="add" class="btn btn-outline-secondary add-btn update-cart"><i class="fa fa-cart-plus" aria-hidden="true"></i></button>
