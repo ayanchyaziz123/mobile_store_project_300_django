@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'admin_panel',
     'user_panel',
+    'user_auth',
 ]
 
 MIDDLEWARE = [
@@ -121,6 +122,11 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.0/howto/static-files/
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+
+MESSAGE_TAGS = {
+    messages.ERROR: 'danger'
+}
+
 
 
 MESSAGE_TAGS = {

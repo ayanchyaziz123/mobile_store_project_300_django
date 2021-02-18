@@ -28,4 +28,5 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('user_panel.urls')),
     path('admin_panel/', include('admin_panel.urls')),
+    path('user_auth/', include('user_auth.urls')),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

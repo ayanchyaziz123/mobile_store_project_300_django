@@ -157,7 +157,7 @@
   </button>
   <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
   <a class="dropdown-item" href="#"><i class="fa fa-eye" aria-hidden="true"></i> View Profile</a>
-    <a class="dropdown-item" href="#"><i class="fa fa-sign-out" aria-hidden="true"></i> Log Out</a>
+    <a class="dropdown-item" href="{% url 'user_logout' %}"><i class="fa fa-sign-out" aria-hidden="true"></i> Log Out</a>
     
   </div>
 </div>
@@ -166,7 +166,7 @@
 
       {% else %}
 
-      <a class="btn btn-secondary btns">Login</a>
+      <a class="btn btn-secondary btns" href="{% url 'user_login' %}">Login</a>
 
       {% endif %}
   
@@ -180,6 +180,18 @@
      
     </nav>
 
+    <!--message-->
+   
+
+   {% for message in messages %}
+
+<div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert" >
+  <strong><i class="fa fa-comments" aria-hidden="true"></i> Message : </strong> {{ message }}
+  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+ {% endfor %}
    
 
 

@@ -193,3 +193,6 @@ def view(request, slug):
 
     }
     return render(request, 'user_panel/view.html', context)
+
+
+
