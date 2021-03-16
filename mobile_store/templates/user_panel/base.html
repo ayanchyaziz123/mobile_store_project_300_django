@@ -180,8 +180,9 @@
      
 
       {% else %}
+      <a class="btn btn-secondary btns mr-3" href="{% url 'user_login' %}">Login</a>
 
-      <a class="btn btn-secondary btns" href="{% url 'user_login' %}">Login</a>
+      <a class="btn btn-secondary btns" href="{% url 'user_create_account' %}">Create Account</a>
 
       {% endif %}
   

@@ -24,7 +24,8 @@ def logIn(request):
         return render(request, 'user_panel/login.html')  
 
 
-
+def create_account(request):
+    return render(request, 'user_panel/create_account.html')
     
 
 def logOut(request):
