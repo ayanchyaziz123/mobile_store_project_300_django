@@ -11,4 +11,5 @@ urlpatterns = [
     path('user_process_order/', views.processOrder, name="user_process_order"),
     path('user_search/', views.serach, name="user_search"),
     path('user_view/<str:slug>', views.view, name="user_view"),
+    path('user_contact/', views.contact, name="user_contact"),
 ]

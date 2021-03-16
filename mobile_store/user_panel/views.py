@@ -194,5 +194,8 @@ def view(request, slug):
     }
     return render(request, 'user_panel/view.html', context)
 
+def contact(request):
+    return render(request, 'user_panel/contact.html')
+
 
 
