@@ -3,42 +3,84 @@
 
 {% block content %}
 
-<h1>This is contact</h1>
 
-
-{% for chat in Chat %}
-
-
-
-
-
-
-<div class="alert alert-dark " role="alert">
- <p> {{chat.user_message}}</p>
+<div class="page-content page-container" id="page-content">
+    <div class="padding">
+        <div class="row container d-flex justify-content-center">
+            <div class="col-md-4">
+                <div class="box box-warning direct-chat direct-chat-warning">
+                    <div class="box-header with-border">
+                        <h3 class="box-title">Chat Messages</h3>
+                        <div class="box-tools pull-right"> <span data-toggle="tooltip" title="" class="badge bg-yellow" data-original-title="3 New Messages">20</span> <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i> </button> <button type="button" class="btn btn-box-tool" data-toggle="tooltip" title="" data-widget="chat-pane-toggle" data-original-title="Contacts"> <i class="fa fa-comments"></i></button> <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i> </button> </div>
+                    </div>
+                    <div class="box-body">
+                        <div class="direct-chat-messages" id="mydiv">
+                            {% for chat in Chat %}
+                            <div class="direct-chat-msg right">
+                                <div class="direct-chat-info clearfix"> <span class="direct-chat-name pull-right">You</span> <span class="direct-chat-timestamp pull-left">23 Jan 2:05 pm</span> </div> <img class="direct-chat-img" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTMRBqTeY-dTImnv-0qS4j32of8dVtWelSEMw&usqp=CAU" alt="message user image">
+                                <div class="direct-chat-text"> {{chat.user_message}} </div>
+                            </div>
+                            <div class="direct-chat-msg">
+                                <div class="direct-chat-info clearfix"> <span class="direct-chat-name pull-left">ChatBoot</span> <span class="direct-chat-timestamp pull-right">23 Jan 5:37 pm</span> </div> <img class="direct-chat-img" src="https://st3.depositphotos.com/8950810/17657/v/600/depositphotos_176577880-stock-illustration-cute-smiling-funny-robot-chat.jpg" alt="message user image">
+                                <div class="direct-chat-text">  {{chat.chatbot_message}} </div>
+                            </div>
+                            {% endfor %}
+                            
+                        </div>
+                    </div>
+                    <form id="form" method="POST">
+                    <div class="box-footer">
+                        <form action="#" method="post">
+                        <input id="chatbot_messages" type="hidden" name="chatbot_messages" value="123123">
+    
+                            <div class="input-group"> <input type="text" id="user_messages" type="text" name="user_messages" class="form-control">
+                             <span class="input-group-btn">
+                             
+                               <input  type="submit" name="submit" value="Send" class="btn btn-warning btn-flat">
+                               </span> </div>
+                        </form>
+                    </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
 
-<div class="alert alert-primary ml-5" role="alert">
-<p class="text-left"> {{chat.chatbot_message}}</p>
-</div>
 
 
 
 
 
 
-{% endfor %}
 
 
 
 
-<form id="form" method="POST">
-    <input id="user_messages" type="text" name="user_messages" class="form-control">
-    <input id="chatbot_messages" type="hidden" name="chatbot_messages" value="123123">
-    <input  type="submit" name="submit" value="click">
-</form>
+
+
+
+
+
+
+<div class="row justify-content-md-center">
+
+<div class="col-sm-5">
+
+
+
+
+
+
+
+
+
+
 
 
 <div id="output">
+</div>
+</div>
 </div>
 
 <script>
@@ -72,6 +114,11 @@ e.preventDefault();
 
 
         });     
+
+</script>
+
+<script>
+    $("#mydiv").scrollTop($("#mydiv")[0].scrollHeight);
 
 </script>
 
