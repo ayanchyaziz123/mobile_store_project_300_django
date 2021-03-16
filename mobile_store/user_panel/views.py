@@ -1,12 +1,14 @@
 from django.shortcuts import render
 from django.http import JsonResponse
 from .models import *
+from django.contrib.auth.models import User
 import json
 import datetime
 from django.views.decorators.csrf import csrf_protect
 from django.db.models import Q
 from django.core.paginator import Paginator
 from . utils import cartData, cookieCart, guestOrder
+
 
 #
 # Create your views here.
@@ -194,8 +196,9 @@ def view(request, slug):
     }
     return render(request, 'user_panel/view.html', context)
 
-def contact(request):
-    return render(request, 'user_panel/contact.html')
+
+
+    
 
 
 

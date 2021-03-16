@@ -106,3 +106,9 @@ class ShippingAddress(models.Model):
 
     def __str__(self):
         return self.address
+
+class Chat(models.Model):
+    user_name  = models.CharField(max_length=200)
+    user_message  = models.CharField(max_length=500)
+    chatbot_message = models.CharField(max_length=500)
+

@@ -29,4 +29,5 @@ urlpatterns = [
     path('', include('user_panel.urls')),
     path('admin_panel/', include('admin_panel.urls')),
     path('user_auth/', include('user_auth.urls')),
+    path('user_chatbot/', include('user_chatbot.urls')),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

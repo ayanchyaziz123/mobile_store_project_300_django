@@ -5,4 +5,70 @@
 
 <h1>This is contact</h1>
 
+
+{% for chat in Chat %}
+
+
+<p>
+{{chat.user_message}}
+</p>
+<p class="ml-5">
+{{chat.chatbot_message}}
+</p>
+
+
+
+
+
+{% endfor %}
+
+
+
+
+<form id="form" method="POST">
+    <input id="user_messages" type="text" name="user_messages">
+    <input id="chatbot_messages" type="hidden" name="chatbot_messages" value="123123">
+    <input  type="submit" name="submit" value="submit">
+</form>
+
+
+<div id="output">
+</div>
+
+<script>
+
+$('#form').on('submit', function(e){
+
+e.preventDefault();
+
+  $.ajax({
+       type : "POST", 
+       url: "{% url 'chat_contact' %}",
+       data: {
+        user_messages : $('#user_messages').val(),
+        chatbot_messages : $('#chatbot_messages').val(),
+        csrfmiddlewaretoken: '{{ csrf_token }}',
+        dataType: "json",
+
+       },
+       
+       success: function(data){
+          $('#output').html(data.msg) /* response message */
+          location.reload();
+       },
+
+       failure: function() {
+           console.log("Wrong");
+           
+       }
+
+
+   });
+
+
+        });     
+
+</script>
+
+
 {% endblock content %}
