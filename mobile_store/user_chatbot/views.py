@@ -5,6 +5,8 @@ from user_panel.models import *
 from django.contrib.auth.models import User
 
 # Create your views here.
+from user_panel. utils import cartData, cookieCart, guestOrder
+
 
 
 import nltk
@@ -131,13 +133,39 @@ def contact(request):
     if request.user.is_authenticated:
         user_name = request.user.username          
         chat = Chat.objects.filter(user_name=user_name) 
+        data = cartData(request)
+
+        cartItems = data['cartItems']
+        order = data['order']
+        items = data['items']
+
+        products = Product.objects.all()
+        context = {}
         context = {
-                'Chat':chat,
-            }
+        'products': products,
+        'items': items,
+        'order': order,
+        'cartItems': cartItems,
+        'Chat':chat,
+         }
         return render(request, 'user_panel/contact.html', context)     
 
     else: 
-        return render(request, 'user_panel/login.html')   
+        data = cartData(request)
+
+        cartItems = data['cartItems']
+        order = data['order']
+        items = data['items']
+
+        products = Product.objects.all()
+        context = {}
+        context = {
+        'products': products,
+        'items': items,
+        'order': order,
+        'cartItems': cartItems,
+         }
+        return render(request, 'user_panel/login.html', context)   
 
 def chat_contact(request):
     user_name = request.user.username    
@@ -154,9 +182,21 @@ def chat_contact(request):
             return JsonResponse(response) # return response as JSON
                      
     chat = Chat.objects.filter(user_name=user_name) 
+    data = cartData(request)
+
+    cartItems = data['cartItems']
+    order = data['order']
+    items = data['items']
+
+    products = Product.objects.all()
+    context = {}
     context = {
-                'Chat':chat,
-            }
+    'products': products,
+    'items': items,
+    'order': order,
+    'cartItems': cartItems,
+    'Chat':chat,
+         }
     return render(request, 'user_panel/contact.html', context)
 
 
