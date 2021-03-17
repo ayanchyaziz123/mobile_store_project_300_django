@@ -1,0 +1,2 @@
+model_checkpoint_path: "F:\\project 300 all files\\mobile_store_p_300_main_django\\mobile_store\\model.tflearn"
+all_model_checkpoint_paths: "F:\\project 300 all files\\mobile_store_p_300_main_django\\mobile_store\\model.tflearn"
