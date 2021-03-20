@@ -6,16 +6,16 @@
 			<div class="box-element">
             <h3 class="text-center">Predict A mobile Price</h3>
 
-				<form>
-
+				<form method="post" action="{% url 'price_prediction' %}">
+    {% csrf_token %}
                 <div class="row mt-5">
                
                 <div class="col-3">
                  <div class="form-group">
     <label for="exampleFormControlSelect1">Model</label>
-    <select class="form-control" id="exampleFormControlSelect1">
-      <option>I phone</option>
-      <option>Samsung</option>
+    <select class="form-control" id="exampleFormControlSelect1" name="modell">
+      <option>Samsung_A21s</option>
+      <option>Samsung_A30s</option>
       <option>Nokia</option>
       <option>4</option>
       <option>5</option>
@@ -26,41 +26,34 @@
                 <div class="col-3">
                  <div class="form-group">
     <label for="exampleFormControlSelect1">ROM</label>
-    <select class="form-control" id="exampleFormControlSelect1">
-      <option>16 Gb</option>
-      <option>32 Gb</option>
-      <option>Nokia</option>
-      <option>4</option>
-      <option>5</option>
+    <select class="form-control" id="exampleFormControlSelect1" name="rom">
+      <option>64</option>
+      <option>32</option>
+  
     </select>
   </div>
                 </div>
                 <div class="col-3">
                  <div class="form-group">
     <label for="exampleFormControlSelect1">RAM</label>
-    <select class="form-control" id="exampleFormControlSelect1">
-      <option>1 Gb</option>
-      <option>2 Gb</option>
-      <option>Nokia</option>
+    <select class="form-control" id="exampleFormControlSelect1" name="ram">
       <option>4</option>
-      <option>5</option>
+      <option>6</option>
     </select>
   </div>
                 </div>
                 <div class="col-3">
                 <div class="form-group">
     <label for="exampleFormControlSelect1">Cammerra</label>
-    <select class="form-control" id="exampleFormControlSelect1">
-      <option>16 mp</option>
-      <option>32 mp</option>
-      <option>Nokia</option>
-      <option>4</option>
+    <select class="form-control" id="exampleFormControlSelect1" name="cammera">
+      <option>48</option>
+      <option>25</option>
       {% comment %} <option>5</option> {% endcomment %}
     </select>
   </div>
                 </div>
                 </div>
-                <a class="btn btn-secondary text-center" href="">Predict</a>
+                <button type="submit" class="btn btn-secondary text-center" href="">Predict</button>
                 </form>
 
 			</div>

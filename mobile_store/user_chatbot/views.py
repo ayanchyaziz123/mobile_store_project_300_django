@@ -18,6 +18,16 @@ from tensorflow.python.framework import ops
 import random
 import json
 import pickle
+import numpy as np
+
+modelll = None
+
+def load():
+    global modelll
+    if modelll is None:
+        with open('static/mobilee.pkl', 'rb') as f:
+            modelll = pickle.load(f)
+
 
 with open("static/intents.json") as file:
     data = json.load(file)
@@ -198,6 +208,21 @@ def chat_contact(request):
     'Chat':chat,
          }
     return render(request, 'user_panel/contact.html', context)
+
+
+def price_prediction(request):
+    if request.method == "POST":
+        load()
+        modell = request.POST['modell']
+        ram = request.POST['ram']
+        rom = request.POST['rom']
+        cammera = request.POST['cammera']
+        prediction = modelll.predict([[48, 64, 4]])
+        context = {
+        'prediction': prediction,
+        }
+        return render(request,  'user_panel/prediction.html', context) 
+      
 
 
             
