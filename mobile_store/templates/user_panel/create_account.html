@@ -7,13 +7,35 @@
 
 		<div class="col-lg-4">
         <h3 class="mt-3">Create account </h3>
-        <form method="POST" action="{% url 'user_login' %}">
+        <form method="POST" >
         {% csrf_token %}
-        <label>user name</label>
-			<input type="text" class="form-control" placeholder="User name" name="user_name" required>
-             <label>password</label>
-			<input type="password" class="form-control" placeholder="password" name="password" required>
-            <button class="btn btn-secondary mt-2 mb-5">Submit</button>
+           
+
+
+           {% for field in form %}
+		<p>
+
+         <label><i class="fa fa-plus-square-o" aria-hidden="true"></i> {{field.label_tag}}</label><br>
+
+              {{field}}
+
+
+
+
+			{% if field.help_text %}
+				<small style="color: grey;">{{field.help_text}}</small>
+			{% endif %}
+
+			{% for error in field.errors %}
+				<p style="color: red;">{{error}}</p>
+			{% endfor %}
+		</p>
+	{% endfor %}
+	<button style="margin-top:10px" type="submit" class="btn btn-info">Create</button>
+
+
+
+
 		</div>
         </form>
         <div class="col-lg-4">
