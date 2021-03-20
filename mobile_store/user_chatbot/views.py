@@ -217,7 +217,11 @@ def price_prediction(request):
         ram = request.POST['ram']
         rom = request.POST['rom']
         cammera = request.POST['cammera']
-        prediction = modelll.predict([[48, 64, 4]])
+        print(ram, rom, cammera)
+        ram = int(ram)
+        rom = int(rom)
+        cammera = int(cammera)
+        prediction = modelll.predict([[cammera, rom, ram]])
         context = {
         'prediction': prediction,
         }
