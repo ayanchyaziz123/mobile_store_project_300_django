@@ -222,8 +222,23 @@ def price_prediction(request):
         rom = int(rom)
         cammera = int(cammera)
         prediction = modelll.predict([[cammera, rom, ram]])
+        data = cartData(request)
+
+        cartItems = data['cartItems']
+        order = data['order']
+        items = data['items']
+
+        products = Product.objects.all()
         context = {
         'prediction': prediction,
+        'products': products,
+        'items': items,
+        'order': order,
+        'cartItems': cartItems,
+        'cammera':cammera,
+        'ram': ram,
+        'rom':rom,
+        'model': modell,
         }
         return render(request,  'user_panel/prediction.html', context) 
       

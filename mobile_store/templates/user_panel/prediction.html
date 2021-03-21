@@ -1,1 +1,13 @@
-{{prediction}}
+{% extends 'user_panel/base.html' %}
+{% load static %}
+{% block content %}
+<div class="mt-5 text-center">
+<h2>Prediction</h2>
+<p>Model : {{modell}}</p>
+<p>Ram : {{ram}}</p>
+<p>Rom : {{rom}}</p>
+<p>Camera : {{cammera}}</p>
+<p>the predictable price is</P>
+<h5>&#2547;  {{prediction}}</h5>
+</div>
+{% endblock content%}

@@ -61,6 +61,29 @@
 			<br>
 		</div>
 	</div>
+  <h3>Top 3 mobile</h3>
+  <div class="row mt-5">
+  {% for product in products %}
+
+  <div class="col-lg-4">
+    <img class="thumbnail" src="{{product.imageURL1}}" />
+    <div class="box-element product">
+      <h6><strong>{{product.name}}</strong></h6>
+      <p>{{product.descriptions |truncatechars:43}}</p>
+      <hr />
+
+      <button data-product={{product.id}} data-action="add" class="btn btn-outline-secondary add-btn update-cart"><i class="fa fa-cart-plus" aria-hidden="true"></i></button>
+      <a class="btn btn-outline-success" href="{% url 'user_view' product.id %}"><i class="fa fa-eye" aria-hidden="true"></i></a>
+      <h4 style="display: inline-block; float: right"><strong>&#2547; {{product.price|floatformat:2}}</strong></h4>
+    </div>
+  </div>
+
+
+
+
+  {% endfor %}
+    
+</div>
 {% endblock content %}
 
 
