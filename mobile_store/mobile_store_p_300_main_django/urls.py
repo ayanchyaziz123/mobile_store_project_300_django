@@ -22,7 +22,7 @@ from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 
 admin.site.site_header = "ALEcom"
 admin.site.site_title = "AL Ecom Panel"
-admin.site.index_title = "Welcomee Ayan Ecom Admin Panel"
+admin.site.index_title = "Welcomee AL Ecom Admin Panel"
 
 urlpatterns = [
     path('admin/', admin.site.urls),

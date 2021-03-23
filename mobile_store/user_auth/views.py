@@ -65,7 +65,8 @@ def userSignUp(request):
             username = form.cleaned_data.get('username')
             raw_password = form.cleaned_data.get('password')
             user = authenticate(username=username, password=raw_password)
-            login(request, user)  
+            if user is not None:
+               login(request, user)  
             return redirect('user_home')
         else:
             context  = {'form' : form,
