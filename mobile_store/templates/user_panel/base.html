@@ -118,16 +118,6 @@
 
         </ul>
 
-        
-        
-    
-
-
-
-
-
-
-        
         <div class="form-inline my-2 my-lg-0">
           <a href="{% url 'user_cart' %}">
             <img id="cart-icon" src="{% static 'images/cart.png' %}" />
@@ -146,7 +136,7 @@
   <input type="search" class="form-control" name="search"/> </div>
 
 
-  <div class="mr-3"> <button class="btn btn-danger" type="submit">Search</button></div>
+  <div class="mr-3"> <button class="btn btn-danger" type="submit"><i class="fa fa-search" aria-hidden="true"></i></button></div>
   
   </form>
 </div>
@@ -203,9 +193,15 @@
    
 
 
-    <div class="container">{% block content %} {% endblock content %}</div>
-
-
+    <div class="container">
+    <div class="mr-lg-5">
+    {% block content %} 
+    
+    
+    
+    {% endblock content %}</div>
+ </div>
+    
 
     <!--footer-->
 

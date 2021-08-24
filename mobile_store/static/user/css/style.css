@@ -1,5 +1,23 @@
-body{
-	background-color: hsl(0, 0%, 98%);
+@import url('https://fonts.googleapis.com/css2?family=David+Libre&family=Josefin+Sans&display=swap');
+
+:root {
+    --bg-size: 100% 100%;
+    --main_color: #fff;
+    --title: 'Josefin Sans', sans-serif;
+    --font-para: 'David Libre', serif;
+    --btn-color: #bbe1fa;
+    --btn-font-color: #000;
+    --btn-font: 1.5rem;
+    --eff: .3s all ease;
+}
+
+* {
+    font-family: var(--font-para);
+}
+
+
+body {
+    background: hsl(84, 3%, 94%) !important;
 }
 
 h1,h2,h3,h4,h5,h6{
@@ -12,6 +30,10 @@ h1,h2,h3,h4,h5,h6{
 	border-radius: 4px;
 	padding: 10px;
 }
+.form-control:focus {
+    border-color: #1d3c6d;
+    box-shadow: 0 0 0 0.2rem rgba(104, 105, 27, 0.842);
+} 
 
 .thumbnail{
 	width: 100%;
@@ -129,4 +151,10 @@ a{
 }
 .active{
 	text-decoration: overline !important;
+}
+.bg-warning{
+	background-color: #FF9900 !important;
+}
+.btn-danger{
+	background-color: #FF9900 !important;
 }

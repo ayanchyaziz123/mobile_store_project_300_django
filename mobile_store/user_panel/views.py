@@ -21,7 +21,7 @@ def home(request):
     order = data['order']
     items = data['items']
 
-    products = Product.objects.all().order_by('-price')[0:3]
+    products = Product.objects.all().order_by('-price')[0:4]
     context = {}
     context = {
         'products': products,
